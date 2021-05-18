@@ -42,9 +42,11 @@ class Controller extends BaseController
 
     public function randomimage()
     {
+        $data = [];
         $totalImages = (count(Controller::$images));
         $randomNumber = (rand(0,($totalImages-1)));
-        $randomImage = Controller::$images[$randomNumber];
-        return view('image')->with("image", $randomImage);
+        $data["randomImage"] = Controller::$images[$randomNumber];
+        $data["server_ip"] = gethostbyname(gethostname());
+        return view('image')->with("data", $data);
     }
 }
